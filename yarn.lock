@@ -646,10 +646,10 @@
   dependencies:
     "@types/node" "*"
 
-"@types/maildev@^0.0.1":
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/@types/maildev/-/maildev-0.0.1.tgz#9fe4fa05610f6c6afc10224bcca6b67bc3c56fc0"
-  integrity sha512-hh2pmc+7TSO2/xCmjhkEc7JQCpHUjJPrXx4OPNF+oXlv5ratDTGp+YamZvxlf8PSVdPLI11ihmcF6VFuzwA5OQ==
+"@types/maildev@^0.11.28":
+  version "0.11.28"
+  resolved "https://registry.yarnpkg.com/@types/maildev/-/maildev-0.11.28.tgz#dcfa894f6a6b50fab9c41ea2035461670940729f"
+  integrity sha1-3PqJT2prUPq5xB6iA1RhZwlAcp8=
   dependencies:
     "@types/node" "*"
 
