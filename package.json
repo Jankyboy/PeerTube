@@ -172,7 +172,7 @@
     "@types/lodash": "^4.14.64",
     "@types/lru-cache": "^5.1.0",
     "@types/magnet-uri": "^5.1.1",
-    "@types/maildev": "^0.0.1",
+    "@types/maildev": "^0.11.28",
     "@types/memoizee": "^0.4.2",
     "@types/mkdirp": "^1.0.0",
     "@types/mocha": "^8.0.3",
