@@ -194,7 +194,7 @@
     "chai-json-schema": "^1.5.0",
     "chai-xml": "^0.3.2",
     "concurrently": "^5.0.0",
-    "eslint": "^7.2.0",
+    "eslint": "^7.9.0",
     "eslint-config-standard-with-typescript": "^18.0.2",
     "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-node": "^11.0.0",
