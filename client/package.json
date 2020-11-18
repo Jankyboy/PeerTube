@@ -127,7 +127,7 @@
     "videojs-hotkeys": "^0.2.27",
     "videostream": "~3.2.1",
     "webpack-bundle-analyzer": "^3.0.2",
-    "webpack-cli": "^3.0.8",
+    "webpack-cli": "^4.0.0",
     "webtorrent": "^0.108.1",
     "whatwg-fetch": "^3.0.0",
     "zone.js": "~0.10.2"
