@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core'
-import { Notifier } from '@app/core'
+import { LocalStorageService, Notifier } from '@app/core'
 import { LogLevel } from '@shared/models'
 import { LogRow } from './log-row.model'
 import { LogsService } from './logs.service'
@@ -9,12 +9,14 @@ import { LogsService } from './logs.service'
   styleUrls: [ './logs.component.scss' ]
 })
 export class LogsComponent implements OnInit {
+  private static LOCAL_STORAGE_LOG_TYPE_CHOICE_KEY = 'admin-logs-log-type-choice'
+
   @ViewChild('logsElement', { static: true }) logsElement: ElementRef<HTMLElement>
 
   loading = false
 
   logs: LogRow[] = []
-  timeChoices: { id: string, label: string }[] = []
+  timeChoices: { id: string, label: string, dateFormat: string }[] = []
   levelChoices: { id: LogLevel, label: string }[] = []
   logTypeChoices: { id: 'audit' | 'standard', label: string }[] = []
 
@@ -24,19 +26,25 @@ export class LogsComponent implements OnInit {
 
   constructor (
     private logsService: LogsService,
-    private notifier: Notifier
-    ) { }
+    private notifier: Notifier,
+    private localStorage: LocalStorageService
+  ) { }
 
   ngOnInit (): void {
     this.buildTimeChoices()
     this.buildLevelChoices()
     this.buildLogTypeChoices()
 
+    this.loadPreviousChoices()
+
     this.load()
   }
 
   refresh () {
     this.logs = []
+
+    this.localStorage.setItem(LogsComponent.LOCAL_STORAGE_LOG_TYPE_CHOICE_KEY, this.logType)
+
     this.load()
   }
 
@@ -76,15 +84,18 @@ export class LogsComponent implements OnInit {
     this.timeChoices = [
       {
         id: lastWeek.toISOString(),
-        label: $localize`Last week`
+        label: $localize`Last week`,
+        dateFormat: 'shortDate'
       },
       {
         id: lastDay.toISOString(),
-        label: $localize`Last day`
+        label: $localize`Last day`,
+        dateFormat: 'short'
       },
       {
         id: lastHour.toISOString(),
-        label: $localize`Last hour`
+        label: $localize`Last hour`,
+        dateFormat: 'mediumTime'
       }
     ]
 
@@ -95,19 +106,19 @@ export class LogsComponent implements OnInit {
     this.levelChoices = [
       {
         id: 'debug',
-        label: $localize`Debug`
+        label: $localize`debug`
       },
       {
         id: 'info',
-        label: $localize`Info`
+        label: $localize`info`
       },
       {
         id: 'warn',
-        label: $localize`Warning`
+        label: $localize`warning`
       },
       {
         id: 'error',
-        label: $localize`Error`
+        label: $localize`error`
       }
     ]
 
@@ -125,7 +136,11 @@ export class LogsComponent implements OnInit {
         label: $localize`Audit logs`
       }
     ]
+  }
 
-    this.logType = 'audit'
+  private loadPreviousChoices () {
+    this.logType = this.localStorage.getItem(LogsComponent.LOCAL_STORAGE_LOG_TYPE_CHOICE_KEY)
+
+    if (this.logType !== 'standard' && this.logType !== 'audit') this.logType = 'audit'
   }
 }
